@@ -86,13 +86,13 @@ class SGDSolver:
         for layer in net.layers:
             if layer.trainable:
                 # update weights
-                delta_W = self.momentum*layer.prev_grad_W - self.learning_rate*layer.grad_W / net.batch_size
-                layer.W = layer.W + delta_W
+                delta_W = self.momentum*layer.prev_grad_W + self.learning_rate*layer.grad_W / net.batch_size
+                layer.W = layer.W - delta_W
                 layer.prev_grad_W = delta_W
                 
                 # update bias
-                delta_b = self.momentum*layer.prev_grad_b - self.learning_rate*layer.grad_b / net.batch_size
-                layer.b = layer.b + delta_b
+                delta_b = self.momentum*layer.prev_grad_b + self.learning_rate*layer.grad_b / net.batch_size
+                layer.b = layer.b - delta_b
                 layer.prev_grad_b = delta_b
                 
         
